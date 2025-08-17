@@ -14,11 +14,11 @@ const Business = () => {
       arrayofarticles.map((element)=>{
         const getcard = document.getElementById('card');
       const card = document.createElement("div");
-  card.className = "bg-white rounded-lg shadow-md overflow-hidden w-64"; // Tailwind styling
+  card.className = "bg-white rounded-lg shadow-md overflow-hidden w-64"; 
 
-  // Image
+  
   const img = document.createElement("img");
-  img.src = element.urlToImage; // your image URL
+  img.src = element.urlToImage; 
   img.alt = "News Image";
   img.className = "w-full h-36 object-cover";
 
