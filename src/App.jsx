@@ -1,76 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Home from './components/Home'
-import Headlines from './components/Business'
-import Sports from './components/Sports'
-import Technology from './components/Technology'
-import Health from './components/Health'
-import Business from './components/Business'
-const router = createBrowserRouter(
-  [
-    {
-      path:'/',
-      element:
-      <div>
-        <Navbar/>
-        <Home/>
-      </div>
-    },
-    {
-      path:'/business',
-      element:
-      <div>
-        <Navbar/>
-        <Business/>
-      </div>
-    },
-    {
-      path:'/sports',
-      element:
-      <div>
-        <Navbar/>
-        <Sports/>
-      </div>
-    },
-    {
-      path:'/technology',
-      element:
-      <div>
-        <Navbar/>
-        <Technology/>
-      </div>
-      
-    },
-    {
-      path:'/health',
-      element:
-      <div>
-        <Navbar/>
-        <Health/>
-      </div>
-    }
-  ]
-)
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Sports from "./components/Sports";
+import Technology from "./components/Technology";
+import Health from "./components/Health";
+import Business from "./components/Business";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+// Layout component (shared across all routes)
+function Layout() {
   return (
     <div>
-      <header className='flex p-3 bg-blue-100'>
-        <h1 className='text-xl font-bold'>Newsly</h1>
-        <p className='text-center w-[100%]'>All News Top Headlines</p>
+      <header className="flex p-3 bg-blue-100">
+        <h1 className="text-xl font-bold">Newsly</h1>
+        <p className="text-center w-[100%]">All News Top Headlines</p>
       </header>
-      <div className='flex flex-col items-center mt-3 font-medium text-xl'>
-        <h2>Stay Update with Trendy News</h2>
-        <RouterProvider router={router}/>
+      <div className="flex justify-center">
+        <Navbar />
       </div>
+      <div className="flex flex-col items-center mt-3 font-medium text-xl">
+        <h2>Stay Updated with Trendy News</h2>
+      </div>
+      {/* This is where each route will render */}
+      <Outlet />
     </div>
-  )
+  );
 }
 
-export default App
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/business", element: <Business /> },
+      { path: "/sports", element: <Sports /> },
+      { path: "/technology", element: <Technology /> },
+      { path: "/health", element: <Health /> },
+    ],
+  },
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
+}
+
+export default App;
